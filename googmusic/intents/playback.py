@@ -16,12 +16,12 @@ def resume():
 @ask.intent("GoogMusicSkipIntent")
 def skip():
     next_ids = music_queue.next()['nid']
-	streams = client.get_stream_url(next_ids)
+    streams = client.get_stream_url(next_ids)
     return audio().enqueue(streams)
 
 @ask.intent("GoogMusicPrevIntent")
     prev_ids = music_queue.next()['nid']
-	streamss = client.get_stream_url(prev_ids)
+    streamss = client.get_stream_url(prev_ids)
     return audio().enqueue(streamss)
 
 @ask.intent("GoogMusicThumbsDown")
