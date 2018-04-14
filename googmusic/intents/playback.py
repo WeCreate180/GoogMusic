@@ -27,21 +27,18 @@ def prev():
 
 @ask.intent("GoogMusicThumbsDown")
 def thumbsDown():
-    sid = music_queue.current()['storeId']
-    sid['rating'] = '1'
-    mc.change_song_metadata(sid)
+    sid = music_queue.current()['nid']
+    client.rate_songs(sid, 1)
 
 @ask.intent("GoogMusicThumbsUp")
 def thumbsUp():
-    sids = music_queue.current()['storeId']
-    sids['rating'] = '5'
-    mc.change_song_metadata(sids)
+    sids = music_queue.current()['nid']
+    client.rate_songs(sids, 5)
 
 @ask.intent("GoogMusicThumbsNone")
 def clearRating():
-    sidss = music_queue.current()['storeId']
-    sidss['rating'] = '0'
-    mc.change_song_metadata(sidss)
+    sidss = music_queue.current()['nid']
+    client.rate_songs(sidss, 0)
 
 @ask.on_playback_nearly_finished()
 def nearly_finished():
