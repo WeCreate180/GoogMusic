@@ -20,21 +20,25 @@ def skip():
     return audio().enqueue(streams)
 
 @ask.intent("GoogMusicPrevIntent")
+def prev():
     prev_ids = music_queue.next()['nid']
     streamss = client.get_stream_url(prev_ids)
     return audio().enqueue(streamss)
 
 @ask.intent("GoogMusicThumbsDown")
+def thumbsDown():
     sid = music_queue.current()['storeId']
     sid['rating'] = '1'
     mc.change_song_metadata(sid)
 
 @ask.intent("GoogMusicThumbsUp")
+def thumbsUp():
     sids = music_queue.current()['storeId']
     sids['rating'] = '5'
     mc.change_song_metadata(sids)
 
 @ask.intent("GoogMusicThumbsNone")
+def clearRating():
     sidss = music_queue.current()['storeId']
     sidss['rating'] = '0'
     mc.change_song_metadata(sidss)
