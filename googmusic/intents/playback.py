@@ -13,6 +13,32 @@ def pause():
 def resume():
     return audio('Resuming').resume()
 
+@ask.intent("GoogMusicSkipIntent")
+def skip():
+    next_ids = music_queue.next()['nid']
+	streams = client.get_stream_url(next_ids)
+    return audio().enqueue(streams)
+
+@ask.intent("GoogMusicPrevIntent")
+    prev_ids = music_queue.next()['nid']
+	streamss = client.get_stream_url(prev_ids)
+    return audio().enqueue(streamss)
+
+@ask.intent("GoogMusicThumbsDown")
+    sid = music_queue.current()['storeId']
+    sid['rating'] = '1'
+    mc.change_song_metadata(sid)
+
+@ask.intent("GoogMusicThumbsUp")
+    sids = music_queue.current()['storeId']
+    sids['rating'] = '5'
+    mc.change_song_metadata(sids)
+
+@ask.intent("GoogMusicThumbsNone")
+    sidss = music_queue.current()['storeId']
+    sidss['rating'] = '0'
+    mc.change_song_metadata(sidss)
+
 @ask.on_playback_nearly_finished()
 def nearly_finished():
     if len(music_queue) > 0:
