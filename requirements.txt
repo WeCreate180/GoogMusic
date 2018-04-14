@@ -9,7 +9,7 @@ click==6.7
 cryptography==2.1.1
 decorator==4.2.1
 Flask==0.12.1
-Flask-Ask==0.9.8
+git+git://github.com/WeCreate180/Flask-Ask.git
 future==0.16.0
 fuzzywuzzy==0.16.0
 gmusicapi==11.0.1
