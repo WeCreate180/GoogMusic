@@ -3,9 +3,9 @@ from flask_ask import Ask, statement
 from gmusicapi import Mobileclient
 
 app = Flask(__name__)
-email = os.environ.get('EMAIL', none)
-password = os.environ.get('PASSWORD', none)
-android_id = os.environ.get('PORT', 17995)
+email = os.environ.get('password', 17995)
+password = os.environ.get('password', 17995)
+android_id = os.environ.get('android_id', 17995)
 
 ask = Ask(app, '/alexa')
 
