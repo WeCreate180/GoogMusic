@@ -63,7 +63,7 @@ def clearRating():
 @ask.intent("GoogMusicTitle")
 def clearRating():
     title = client.get_track_info(music_queue.current()['name'])
-    return audio(title)
+    return audio(str(title))
 
 @ask.on_playback_nearly_finished()
 def nearly_finished():
