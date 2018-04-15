@@ -4,7 +4,7 @@ from flask_ask import Ask, statement
 from gmusicapi import Mobileclient
 
 app = Flask(__name__)
-email = os.environ.get('password', 17995)
+email = os.environ.get('email', 17995)
 password = os.environ.get('password', 17995)
 android_id = os.environ.get('android_id', 17995)
 
