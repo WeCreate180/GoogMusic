@@ -3,15 +3,17 @@ from flask_ask import Ask, statement
 from gmusicapi import Mobileclient
 
 app = Flask(__name__)
-app.config.from_object('config')
+email = os.environ.get('EMAIL', none)
+password = os.environ.get('PASSWORD', none)
+android_id = os.environ.get('PORT', 17995)
 
 ask = Ask(app, '/alexa')
 
 client = Mobileclient()
 
-print('Logging in as:', app.config['GOOGLE_EMAIL'], 'with ANDROID_ID', app.config['ANDROID_ID'])
+print('Logging in as:', email, 'with ANDROID_ID', android_id)
 
-if client.login(app.config['GOOGLE_EMAIL'], app.config['GOOGLE_PASSWORD'], app.config['ANDROID_ID']):
+if client.login(email, password, android_id):
     print('Login successful!')
 else:
     raise Exception('Login failed')
