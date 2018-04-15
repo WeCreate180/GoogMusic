@@ -1,12 +1,6 @@
 from flask_ask import statement, audio
 from googmusic import ask, music_queue, client
 
-@ask.intent("AMAZON.NextIntent")
-def skip():
-    next_ids = music_queue.next()['nid']
-    streams = client.get_stream_url(next_ids)
-    return audio().play(streams)
-
 @ask.intent('AMAZON.CancelIntent')
 def cancel():
     return audio().stop()
@@ -33,17 +27,17 @@ def prev():
 
 @ask.intent("GoogMusicThumbsDown")
 def thumbsDown():
-    sid = music_queue.current()['storeId']
+    sid = music_queue.current()['id']
     client.rate_songs(sid, 1)
 
 @ask.intent("GoogMusicThumbsUp")
 def thumbsUp():
-    sids = music_queue.current()['storeId']
+    sids = music_queue.current()['id']
     client.rate_songs(sids, 5)
 
 @ask.intent("GoogMusicThumbsNone")
 def clearRating():
-    sidss = music_queue.current()['storeId']
+    sidss = music_queue.current()['id']
     client.rate_songs(sidss, 0)
 
 @ask.on_playback_nearly_finished()
