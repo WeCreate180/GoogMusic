@@ -1,6 +1,12 @@
 from flask_ask import statement, audio
 from googmusic import ask, music_queue, client
 
+@ask.intent("AMAZON.NextIntent")
+def skip():
+    next_ids = music_queue.next()['nid']
+    streams = client.get_stream_url(next_ids)
+    return audio().play(streams)
+
 @ask.intent('AMAZON.CancelIntent')
 def cancel():
     return audio().stop()
