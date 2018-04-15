@@ -19,6 +19,18 @@ def skip():
     streams = client.get_stream_url(next_ids)
     return audio().play(streams)
 
+@ask.intent("AMAZON.NextIntent")
+def skip():
+    next_ids = music_queue.next()['nid']
+    streams = client.get_stream_url(next_ids)
+    return audio().play(streams)
+
+@ask.intent("AMAZON.PreviousIntent")
+def prev():
+    prev_ids = music_queue.prev()['nid']
+    streamss = client.get_stream_url(prev_ids)
+    return audio().play(streamss)
+
 @ask.intent("GoogMusicPrevIntent")
 def prev():
     prev_ids = music_queue.prev()['nid']
