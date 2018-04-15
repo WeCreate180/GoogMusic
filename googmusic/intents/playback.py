@@ -30,18 +30,28 @@ def thumbsDown():
     sid = client.get_track_info(music_queue.current()['nid'])
     sid['rating'] = 1
     client.change_song_metadata(sid)
+    next_ids = music_queue.next()['nid']
+    streams = client.get_stream_url(next_ids)
+    return audio("Disliked.").play(streams)
 
 @ask.intent("GoogMusicThumbsUp")
 def thumbsUp():
     sids = client.get_track_info(music_queue.current()['nid'])
     sids['rating'] = 5
     client.change_song_metadata(sids)
+    return audio("Liked.")
 
 @ask.intent("GoogMusicThumbsNone")
 def clearRating():
     sidss = client.get_track_info(music_queue.current()['nid'])
     sidss['rating'] = 0
     client.change_song_metadata(sidss)
+    return audio("Rating cleared.")
+
+@ask.intent("GoogMusicTitle")
+def clearRating():
+    title = client.get_track_info(music_queue.current()['title'])
+    return audio(title)
 
 @ask.on_playback_nearly_finished()
 def nearly_finished():
