@@ -17,11 +17,6 @@ def play_song(song_name, artist_name):
     if song is False:
         return statement('Sorry, I couldn\' find that song')
 
-    print('---------DEBUG MODE ENABLED--------')
-    print(song_name)
-    print(artist_name)
-    print('---------END OF DEBUG LOG----------')
-    
     print('storeId', song['storeId'])
 
     stream_url = client.get_stream_url(song['storeId'])
