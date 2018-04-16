@@ -64,7 +64,7 @@ def clearRating():
 def clearRating():
     preSetup = client.get_track_info(music_queue.current()['nid'])
     title = preSetup['title']
-    print (title)
+    print(title)
     return audio(title)
 
 @ask.on_playback_nearly_finished()
