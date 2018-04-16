@@ -1,5 +1,5 @@
 from flask_ask import statement, audio
-from googmusic import ask, music_queue, client
+from googmusic import ask, music_queue, client, musicman
 
 @ask.intent('AMAZON.CancelIntent')
 def cancel():
@@ -67,6 +67,13 @@ def clearRating():
     print(title)
     return audio(title)
 
+@ask.intent("GoogMusicArtist")
+def clearRating():
+    prePreSetup = client.get_track_info(music_queue.current()['nid'])
+    artist = prePreSetup['artist']
+    print(artist)
+    return audio(artist)
+
 @ask.intent("GoogMusicLoopMode")
 def clearRating():
     if music_queue.loop():
@@ -91,7 +98,10 @@ def clearRating():
 @ask.intent("AMAZON.StartOverIntent")
 def restartIntent():
     restart_id = client.get_track_info(music_queue.current()['nid'])
-    reStream = client.get_stream_url(restart_id)
+    artist = restart_id['artist']
+    title = restart_id['title']
+    song = musicman.get_song(title, artist)
+    reStream = client.get_stream_url(song['storeId'])
     return audio.play(reStream)
 
 @ask.on_playback_nearly_finished()
