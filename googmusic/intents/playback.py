@@ -67,6 +67,13 @@ def clearRating():
     print(title)
     return audio(title)
 
+@ask.intent("GoogMusicLoopMode")
+def clearRating():
+    if music_queue.loop():
+        return audio('Loop mode on.')
+    else:
+        return audio('Loop mode off.')
+
 @ask.on_playback_nearly_finished()
 def nearly_finished():
     if len(music_queue) > 0:
