@@ -74,21 +74,21 @@ def clearRating():
     else:
         return audio('Loop mode off.')
     
-@ask.intent("AMAZON.LoopOff")
+@ask.intent("AMAZON.LoopOffIntent")
 def clearRating():
     if music_queue.loop():
         return audio('Loop mode on.')
     else:
         return audio('Loop mode off.')
     
-@ask.intent("AMAZON.LoopOn")
+@ask.intent("AMAZON.LoopOnIntent")
 def clearRating():
     if music_queue.loop():
         return audio('Loop mode on.')
     else:
         return audio('Loop mode off.')
     
-@ask.intent("AMAZON.StartAction<object@MusicCreativeWork>")
+@ask.intent("AMAZON.StartOverIntent")
 def restartIntent():
     restart_id = client.get_track_info(music_queue.current()['nid'])
     reStream = client.get_stream_url(restart_id)
