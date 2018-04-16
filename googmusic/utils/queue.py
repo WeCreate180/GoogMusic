@@ -40,3 +40,11 @@ class MusicQueue(object):
     def clear(self):
         self._index = None
         self._queue = []
+    
+    def loop(self):
+        if self._loop:
+            self._loop = False
+            return False
+        else:
+            self._loop = True
+            return True
