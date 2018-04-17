@@ -20,7 +20,7 @@ def play_song(song_name, artist_name):
     print('storeId', song['storeId'])
     track_info = client.get_track_info(song['storeId'])
     music_queue.enqueue(track_info)
-    stream_url = client.get_stream_url(music_queue.current(['storeId']))
+    stream_url = client.get_stream_url(music_queue.current()['storeId'])
     print(stream_url)
     return audio('Playing %s' % song_name).play(stream_url)
 
