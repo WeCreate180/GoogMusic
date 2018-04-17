@@ -30,6 +30,7 @@ def play_artist(artist_name):
 
     artist_info = client.get_artist_info(artist, include_albums = False, max_top_tracks=25, max_rel_artist=0)
     top_tracks = artist_info['topTracks']
+    print(top_tracks)
 
     if not top_tracks:
         return statement('I\'m sorry, I couldn\'t find that artist')
