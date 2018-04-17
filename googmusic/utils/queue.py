@@ -11,6 +11,9 @@ class MusicQueue(object):
 
     def __len__(self):
         return len(self._queue)
+    
+    def getSongID(self):
+        return self._song_id
 
     def enqueue(self, track):
         if len(self._queue) == 0:
