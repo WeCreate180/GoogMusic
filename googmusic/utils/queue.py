@@ -4,6 +4,7 @@ class MusicQueue(object):
     _queue = []
     _index = None
     _loop = False
+    _song_id = ''
 
     def __init__(self):
         pass
