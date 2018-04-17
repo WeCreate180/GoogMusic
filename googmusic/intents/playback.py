@@ -14,25 +14,25 @@ def resume():
     return audio('Resuming').resume()
 
 @ask.intent("GoogMusicSkipIntent")
-def skip():
+def googSkip():
     next_ids = music_queue.next()['nid']
     streams = client.get_stream_url(next_ids)
     return audio().play(streams)
 
 @ask.intent("AMAZON.NextIntent")
-def skip():
+def amznSkip():
     next_ids = music_queue.next()['nid']
     streams = client.get_stream_url(next_ids)
     return audio().play(streams)
 
 @ask.intent("AMAZON.PreviousIntent")
-def prev():
+def amznPrev():
     prev_ids = music_queue.prev()['nid']
     streamss = client.get_stream_url(prev_ids)
     return audio().play(streamss)
 
 @ask.intent("GoogMusicPrevIntent")
-def prev():
+def googPrev():
     prev_ids = music_queue.prev()['nid']
     streamss = client.get_stream_url(prev_ids)
     return audio().play(streamss)
@@ -61,38 +61,42 @@ def clearRating():
     return audio("Rating cleared.")
 
 @ask.intent("GoogMusicTitle")
-def clearRating():
+def googMusicTitle():
     preSetup = client.get_track_info(music_queue.current()['nid'])
     title = preSetup['title']
     print(title)
     return audio(title)
 
 @ask.intent("GoogMusicArtist")
-def clearRating():
+def googArtistTitle():
     prePreSetup = client.get_track_info(music_queue.current()['nid'])
     artist = prePreSetup['artist']
     print(artist)
     return audio(artist)
 
 @ask.intent("GoogMusicLoopMode")
-def clearRating():
-    if music_queue.loop():
+def googLoopMode():
+    if not music_queue.loop():
         return audio('Loop mode on.')
     else:
         return audio('Loop mode off.')
     
 @ask.intent("AMAZON.LoopOffIntent")
-def clearRating():
-    if music_queue.loop():
+def amznLoopOff():
+    if not music_queue.loop():
+        music_queue.loopOn()
         return audio('Loop mode on.')
     else:
+        music_queue.loopff()
         return audio('Loop mode off.')
     
 @ask.intent("AMAZON.LoopOnIntent")
-def clearRating():
-    if music_queue.loop():
+def amznLoopOn():
+    if not music_queue.loop():
+        music_queue.loopOn()
         return audio('Loop mode on.')
     else:
+        music_queue.loopOff()
         return audio('Loop mode off.')
     
 @ask.intent("AMAZON.StartOverIntent")
