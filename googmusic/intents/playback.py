@@ -79,7 +79,7 @@ def googArtistTitle():
 @ask.intent("GoogMusicLoopMode")
 def googLoopMode():
     if not music_queue.loop():
-        music_queue.loopOn()
+        music_queue.loopOn(music_queue.current()['storeId'])
         return audio('Loop mode on.')
     else:
         music_queue.loopOff()
@@ -88,7 +88,7 @@ def googLoopMode():
 @ask.intent("AMAZON.LoopOffIntent")
 def amznLoopOff():
     if not music_queue.loop():
-        music_queue.loopOn()
+        music_queue.loopOn(music_queue.current()['storeId'])
         return audio('Loop mode on.')
     else:
         music_queue.loopOff()
@@ -97,7 +97,7 @@ def amznLoopOff():
 @ask.intent("AMAZON.LoopOnIntent")
 def amznLoopOn():
     if not music_queue.loop():
-        music_queue.loopOn()
+        music_queue.loopOn(music_queue.current()['storeId'])
         return audio('Loop mode on.')
     else:
         music_queue.loopOff()
@@ -116,7 +116,7 @@ def restartIntent():
 def nearly_finished():
     if len(music_queue) > 0:
         if music_queue.loop():
-            current_id = SONG_ID
+            current_id = music_queue.getSongID()
             current_stream = client.get_stream_url(current_id)
             return audio().enqueue(current_stream)
         else:
@@ -124,4 +124,4 @@ def nearly_finished():
 
             stream = client.get_stream_url(next_id)
 
-        return audio().enqueue(stream)
+            return audio().enqueue(stream)
