@@ -48,8 +48,9 @@ class MusicQueue(object):
         self._index = None
         self._queue = []
         
-    def loopOn(self):
+    def loopOn(self, songID):
         self._loop = True
+        self._song_id = songID
         
     def loopOff(self):
         self._loop = False
