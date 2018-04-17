@@ -106,9 +106,10 @@ def restartIntent():
 
 @ask.on_playback_nearly_finished()
 def nearly_finished():
-    if len(music_queue) > 0:
-        next_id = music_queue.next()['nid']
+    if music_queue.loop():
+        if len(music_queue) > 0:
+            next_id = music_queue.next()['nid']
 
-        stream = client.get_stream_url(next_id)
+            stream = client.get_stream_url(next_id)
 
-        return audio().enqueue(stream)
+            return audio().enqueue(stream)
