@@ -18,10 +18,9 @@ def play_song(song_name, artist_name):
         return statement('Sorry, I couldn\' find that song')
 
     print('storeId', song['storeId'])
-    music_queue.enqueue(song)
     stream_url = client.get_stream_url(song['storeId'])
     print(stream_url)
-    return audio('Playing %s' % song_name).enqueue(stream_url)
+    return audio('Playing %s' % song_name).play(stream_url)
 
 @ask.intent('GoogMusicPlayArtistIntent')
 def play_artist(artist_name):
