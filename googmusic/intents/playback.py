@@ -1,6 +1,8 @@
 from flask_ask import statement, audio
 from googmusic import ask, music_queue, client, musicman
 
+SONG_ID = []
+
 @ask.intent('AMAZON.CancelIntent')
 def cancel():
     return audio().stop()
@@ -77,8 +79,10 @@ def googArtistTitle():
 @ask.intent("GoogMusicLoopMode")
 def googLoopMode():
     if not music_queue.loop():
+        music_queue.loopOn()
         return audio('Loop mode on.')
     else:
+        music_queue.loopOff()
         return audio('Loop mode off.')
     
 @ask.intent("AMAZON.LoopOffIntent")
@@ -87,7 +91,7 @@ def amznLoopOff():
         music_queue.loopOn()
         return audio('Loop mode on.')
     else:
-        music_queue.loopff()
+        music_queue.loopOff()
         return audio('Loop mode off.')
     
 @ask.intent("AMAZON.LoopOnIntent")
@@ -112,8 +116,8 @@ def restartIntent():
 def nearly_finished():
     if len(music_queue) > 0:
         if music_queue.loop():
-            current_id = music_queue.current()['nid']
-            current_stream = client.get_stream_url(next_id)
+            current_id = SONG_ID
+            current_stream = client.get_stream_url(current_id)
             return audio().enqueue(current_stream)
         else:
             next_id = music_queue.next()['nid']
