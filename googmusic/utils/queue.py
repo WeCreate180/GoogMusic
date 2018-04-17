@@ -21,7 +21,7 @@ class MusicQueue(object):
             self._index += 1
             return self._queue[self._index]
         elif self._loop:
-            self._index = 0
+            self._index += 0
             return self._queue[self._index]
         return None
 
