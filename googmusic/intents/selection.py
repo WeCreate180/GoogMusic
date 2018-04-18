@@ -16,7 +16,7 @@ def play_song(song_name, artist_name):
     song = musicman.get_song(song_name, artist_name)
     if song is False:
         return statement('Sorry, I couldn\' find that song')
-
+    music_queue.clear()
     print('storeId', song['storeId'])
     track_info = client.get_track_info(song['storeId'])
     music_queue.enqueue(track_info)
