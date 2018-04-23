@@ -1,0 +1,8 @@
+service: Alexa-Service
+runtime: python3
+api_version: 1
+threadsafe: true
+
+instance_class: B1
+manual_scaling:
+  instances: 1
