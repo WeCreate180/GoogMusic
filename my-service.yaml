@@ -1,4 +1,4 @@
-service: Alexa-Service
+service: echo-amazon
 runtime: python3
 api_version: 1
 threadsafe: true
